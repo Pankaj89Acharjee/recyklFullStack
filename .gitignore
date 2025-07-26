@@ -17,10 +17,10 @@ npm-debug.log*
 Thumbs.db
 
 # Vite & React build
-recykl-frontend/dist/
+#recykl-frontend/dist/
 
 # Backend Build
-recykl-backend/build/
+#recykl-backend/build/
 
 
 
