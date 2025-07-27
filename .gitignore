@@ -1,6 +1,6 @@
 # Ignore node_modules inside both folders
 recykl-backend/node_modules/
-recykl-backend/node_modules/
+recykl-frontend/node_modules/
 
 # Optional ignores
 *.log
