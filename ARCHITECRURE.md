@@ -16,7 +16,7 @@ The Revolv Device Manager follows a typical client-server architecture...
 
 The architecture is structured as a **modular monolith** deployed on **Amazon ECS (Fargate)**, following a **cloud-native**, **microservices-oriented** approach using **Amazon Web Services (AWS)**. It allows fast initial development while maintaining logical separation between services. The architecture is intentionally designed so individual services (e.g., **telemetry ingestion**, **user management**) can be extracted into independent microservices when scaling is required.	It is also designed to meet the core business requirements of security, reliability, and maintainability.
 
-This modular backend is complemented by a **frontend UI (**basically a **React app) hosted on S3 \+ CloudFront**, and the system supports **real-time telemetry, secure APIs, and CI/CD workflows.**
+This modular backend is complemented by a frontend UI (basically a **React app) hosted on S3 \+ CloudFront**, and the system supports **real-time telemetry, secure APIs, and CI/CD workflows.**
 
 1. **Scalable Micro-services Architecture:** 
 
@@ -91,7 +91,7 @@ This modular backend is complemented by a **frontend UI (**basically a **React a
 * Devices Table  
 * Sessions Table
 
-		b. **Amazon DocumentDB (MongoDB)** – For telemetry logs:
+   b. **Amazon DocumentDB (MongoDB)** – For telemetry logs:
 
 * JSON structured Telemetry logs
 
