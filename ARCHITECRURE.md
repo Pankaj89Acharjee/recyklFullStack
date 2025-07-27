@@ -1,6 +1,6 @@
 # 🏗️ Application Architecture
 
-The Recykl Device Manager follows a typical client-server architecture...
+The Revolv Device Manager follows a typical client-server architecture...
 
 ## 🔄 Flow Overview
 
@@ -8,7 +8,7 @@ The Recykl Device Manager follows a typical client-server architecture...
 
 ## 🖼️ Architecture Diagram
 
-![Architecture Diagram](./assets/architecture-diagram.png)
+![Architecture Diagram](./assets/Architecture-diagram.png)
 
 ### **1\. System Architecture Proposal**
 
