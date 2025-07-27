@@ -25,11 +25,23 @@ The **Recykl Device Manager** is a full-stack web application built with:
 - ✅ Dark and Light theme toggle
 - ✅ Responsive Grid and Table views for device listing
 - ✅Recharts for visualization
-- ✅API Rate Limitation
-- ✅Throttling, Caching with Node-Cache
+- ✅API Rate Limitation using `express-rate-limit`
+- ✅Throttling by using `express-slow-down`, Caching with Node-Cache
 - ✅Input Sanitization, Cookie Based Authorization,
 
 ---
+
+
+## 📦 Folder Structure
+
+```
+
+recyklFullStack/
+├── recykl-frontend/       # React app (Vite + TailwindCSS)
+├── recykl-backend/        # Node.js + Express backend
+├── README.md              # Project overview and setup
+
+```
 
 ## Setup Instructions
 
@@ -39,8 +51,8 @@ The **Recykl Device Manager** is a full-stack web application built with:
 
 ### 🔧 Prerequisites
 
-- Node.js ≥ 18
-- PostgreSQL
+- Node.js ≥ 20
+- SQLLite Database
 - Git
 
 ---
@@ -50,8 +62,7 @@ The **Recykl Device Manager** is a full-stack web application built with:
 ```bash
 git clone https://github.com/Pankaj89Acharjee/recyklFullStack.git
 cd recyklFullStack
-cd backend
-cp .env.example .env     # Update database and JWT config
+cd recykl-backend
 npm install
 npx prisma generate      # If using Prisma ORM
 npm run dev              # Starts the server
@@ -61,8 +72,7 @@ npm run dev              # Starts the server
 ### 2️⃣ Frontend Setup
 
 ```bash
-cd ../frontend
-cp .env.example .env     # Update API base URL if needed
+cd ../recykl-frontend
 npm install
 npm run dev              # Starts Vite dev server
 ```
@@ -71,3 +81,84 @@ npm run dev              # Starts Vite dev server
 - Backend will be available at: http://localhost:5000
 
 
+## 📚 Tech Stack / Libraries Used
+
+📦 Tech Stack & Libraries
+
+**Frontend**:
+- React + Vite + TypeScript
+- TailwindCSS
+- React Router DOM
+- React Hook Form
+- Recharts
+- React Toastify
+- Lucide Icons
+- Axios / fetch API
+
+**Backend**:
+- Express.js
+- TypeScript
+- Sequelize ORM (or Prisma if using)
+- SQLite
+- JWT (jsonwebtoken)
+- bcrypt
+- express-rate-limit, express-slow-down
+- cookie-parser
+- cors
+- joi / express-validator
+- node-cache
+
+
+
+## Environment Variables
+
+```bash
+
+# .env (backend)
+PORT=5000
+JWT_SECRET=your_jwt_secret
+DATABASE_URL=file:./dev.db
+NODE_ENV=development
+
+```
+**You don’t need to include actual values, just key names.**
+
+
+## 🧪 Testing
+
+- Backend: Jest + Supertest
+- Run tests using:
+```bash
+npm run test
+```
+
+
+## ✅ API Routes
+
+```bash
+
+| Method | Endpoint               | Description              | Protected |
+|--------|------------------------|--------------------------|-----------|
+| POST   | /auth/register         | Register a new user      | ❌        |
+| POST   | /auth/login            | Login and get token      | ❌        |
+| GET    | /devices/allDevices    | Fetch all devices        | ✅        |
+| POST   | /devices/register      | Register new device      | ✅ (admin)|
+| POST   | /devices/:id/telemetry | Add telemetry data       | ✅        |
+| GET    | /devices/:id/health    | View telemetry history   | ✅        |
+| PATCH  | /devices/:id/decommission    | Decommission device      | ✅ (admin)|
+
+```
+
+## 📸 Screenshots
+
+### 🔐 Login/Landing Screen
+![Login Screen](./assets/Landing.png)
+
+### 🔐 Dashboard Screen
+![Dashboard Screen](./assets/dashboard.png)
+
+### 🔐 Login/Landing Screen
+![Health Screen](./assets/HealthStatus.png)
+
+### 🔐 Summary Screen
+![Summary Screen](./assets/SummaryPage.png)

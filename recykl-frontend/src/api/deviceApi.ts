@@ -44,15 +44,42 @@ export const deviceApi = {
 
 
     getDeviceSummary: async (page: number, limit: number) => {
-        const response = await fetch(`${BASE_URL}/devices/summary?page=${page}&limit=${limit}`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        return response.json();
+        try {
+            const response = await fetch(`${BASE_URL}/devices/summary?page=${page}&limit=${limit}`, {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                return {
+                    success: false,
+                    message: errorData?.message || `HTTP error! status: ${response.status}`,
+                    data: [],
+                    total: 0
+                };
+            }
+
+            const data = await response.json();
+
+            return {
+                success: true,
+                data: data?.data || [],
+                total: data?.total || 0
+            };
+        } catch (error: any) {
+            return {
+                success: false,
+                message: error?.message || 'A network error occurred',
+                data: [],
+                total: 0
+            };
+        }
     },
+
 
     decommissionDevice: async (deviceId: string) => {
         const res = await fetch(`${BASE_URL}/devices/${deviceId}/decommission`, {

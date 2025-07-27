@@ -1,6 +1,7 @@
 import { Search, PlusCircle, Filter, List, LayoutGrid } from 'lucide-react';
 import { RegisterDeviceModal } from '../components/modals/RegisterDeviceModal';
 import { DeviceHealthModal } from '../components/modals/DeviceHealthModal';
+import { DeviceSummaryModal } from '../components/modals/DeviceSummaryModal';
 import { TelemetryModal } from '../components/modals/TelemetryWarningModal';
 import { DeviceRow } from '../components/devices/DeviceRow';
 import { DeviceCard } from '../components/devices/DeviceCard';
@@ -36,6 +37,7 @@ export const DashboardPage: FC = () => {
     const [selectedDeviceForHealth, setSelectedDeviceForHealth] = useState<HealthData | null>(null);
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
     const [showTelemetryModal, setShowTelemetryModal] = useState(false)
+    const [isSummaryModalOpen, setSummaryModalOpen] = useState(false);
     const [selectedDeviceId, setSelectedDeviceId] = useState<string | null>(null);
 
     const fetchDevices = async () => {
@@ -112,6 +114,14 @@ export const DashboardPage: FC = () => {
                     <div className="relative w-full md:w-64">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                         <input type="text" placeholder="Search by location..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div className='relative w-full md:w-64'>
+                        <button
+                            className='flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300'
+                            onClick={() => setSummaryModalOpen(true)}>
+                            Device Summary
+                        </button>
                     </div>
 
                     {/* For Filtering Records */}
@@ -205,6 +215,12 @@ export const DashboardPage: FC = () => {
                     }}
                 />
             )}
+
+
+            <DeviceSummaryModal 
+                isOpen={isSummaryModalOpen}
+                onClose={() => setSummaryModalOpen(false)}
+            />
         </div>
     );
 };

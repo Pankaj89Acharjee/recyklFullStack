@@ -12,5 +12,5 @@ export const apiLimiter = rateLimit({
 export const throttle = slowDown({
   windowMs: 15 * 60 * 1000, // 15 mins
   delayAfter: 20,           // After 20 requests
-  delayMs: 500              // 0.5 sec delay per request
+  delayMs: () => 500              // 0.5 sec delay per request
 });

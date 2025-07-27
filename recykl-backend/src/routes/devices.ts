@@ -22,6 +22,6 @@ router.get('/:id/health', authorize(['Admin', 'User']), getDeviceHealth);
 
 router.put('/:id/decommission', authorize(['Admin']), decommissionDeviceValidation, decommissionDevice);
 
-router.get('/summary', authorize(['Admin', 'User']), deviceSummary);
+router.get('/summary',  deviceSummary);
 
 export default router;
