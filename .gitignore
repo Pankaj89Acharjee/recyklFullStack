@@ -1,26 +1,9 @@
-# Node modules
-**/node_modules/
-node_modules
+# Ignore node_modules inside both folders
+recykl-backend/node_modules/
+recykl-backend/node_modules/
 
-
-# Logs
-**/logs
+# Optional ignores
 *.log
-npm-debug.log*
-
-# Environment files
+dist/
+build/
 .env
-.env.*.local
-
-# OS-specific
-.DS_Store
-Thumbs.db
-
-# Vite & React build
-#recykl-frontend/dist/
-
-# Backend Build
-#recykl-backend/build/
-
-
-

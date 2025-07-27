@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./", // rootDir set to both src and tests
+    "strict": true,
+    "esModuleInterop": true,
+    "types": ["jest"]
+  },
+  "include": ["src", "tests"]
+}

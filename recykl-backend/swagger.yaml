@@ -1,0 +1,179 @@
+openapi: 3.0.0
+info:
+  title: Reckyl API Backend
+  version: 1.0.0
+  description: API documentation for Recykl Device Management backend
+servers:
+  - url: http://localhost:3000
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - role
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+      responses:
+        '201':
+          description: User registered
+
+  /auth/login:
+    post:
+      summary: Login and receive JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: JWT token returned
+
+  /devices/register:
+    post:
+      summary: Register a new device
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+                - firmwareVersion
+                - macAddress
+                - manufacturer
+                - type
+                - location
+              properties:
+                status:
+                  type: string
+                firmwareVersion:
+                  type: string
+                macAddress:
+                  type: string
+                manufacturer:
+                  type: string
+                type:
+                  type: string
+                location:
+                  type: string
+      responses:
+        '201':
+          description: Device registered
+
+  /devices/{id}/telemetry:
+    post:
+      summary: Submit telemetry for a device
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - temperature
+                - cpu
+                - status
+              properties:
+                temperature:
+                  type: number
+                cpu:
+                  type: number
+                status:
+                  type: string
+      responses:
+        '201':
+          description: Telemetry submitted
+
+  /devices/{id}/health:
+    get:
+      summary: Get current and historical health of device
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Health logs returned
+        '404':
+          description: No telemetry data found
+
+  /devices/{id}/decommission:
+    put:
+      summary: Decommission a device (admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Device decommissioned
+        '403':
+          description: Unauthorized (not admin)
+
+  /devices/summary:
+    get:
+      summary: Get paginated device count grouped by type and location
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Summary returned
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
