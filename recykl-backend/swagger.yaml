@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
-  title: Reckyl API Backend
+  title: Revolv API Backend
   version: 1.0.0
   description: API documentation for Recykl Device Management backend
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:5000
 paths:
   /auth/register:
     post:
